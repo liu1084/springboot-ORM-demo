@@ -1,0 +1,68 @@
+## 全局配置
+server:
+  tomcat:
+    accesslog:
+      enabled: true
+    uri-encoding: UTF-8
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    active: dev
+  aop:
+    auto: true
+  http:
+    encoding:
+      charset: UTF-8
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+  application:
+    name: springboot-ORM
+  banner:
+    location: banner.txt
+  thymeleaf:
+    encoding: UTF-8
+    enabled: true
+    cache: false
+    prefix: classpath:/templates/
+    mode: text/html
+---
+## 开发环境
+spring:
+  profiles: dev
+debug: true
+server:
+  port: 9090
+
+---
+## 测试环境
+spring:
+  profiles: test
+debug: true
+server:
+  port: 9090
+
+---
+## demo环境
+spring:
+  profiles: demo
+debug: true
+server:
+  port: 9090
+
+---
+## 生产环境
+spring:
+  profiles: prod
+debug: true
+server:
+  port: 9090
+
+---
+## 演示环境
+spring:
+  profiles: ziming
+debug: true
+server:
+  port: 9090
