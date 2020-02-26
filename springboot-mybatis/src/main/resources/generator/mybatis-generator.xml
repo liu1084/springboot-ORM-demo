@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2020 Jim Liu.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 配置对象环境,注意 MyBatis3 才能生成Example代码 MyBatis3Simple则反之 -->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--设置生的Java文件的编码格式-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--格式化java代码-->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!--格式化xml代码-->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- 插件文档：http://www.mybatis.org/generator/reference/plugins.html -->
+        <!--javaBean 实现序列化接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--javaBean生成toString() 方法-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成时间戳的注释 true：是 false：否 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ：false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/project_dev?serverTimezone=Asia/Shanghai"
+                        userId="root" password="">
+            <!-- 参考文档：-->
+            <!-- http://www.mybatis.org/generator/running/runningWithMaven.html -->
+            <!-- http://www.mybatis.org/generator/usage/mysql.html -->
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+        <!--
+            java类型处理器
+            用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
+            注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型；
+        -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.jim.orm.common.entity.mybatis"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.jim.orm.mybatis.service.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+        <!-- Table文档:http://www.mybatis.org/generator/configreference/table.html -->
+        <!--<table tableName="t_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true">
+            &lt;!&ndash; 解决表字段类型Text、VARCHAR Generator生成*WithBLOBs.java继承Entity &ndash;&gt;
+            &lt;!&ndash;<columnOverride column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>&ndash;&gt;
+        </table>-->
+
+        <table tableName="auth_group" domainObjectName="AuthGroup" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_group_role" domainObjectName="AuthGroupRole" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_permission" domainObjectName="AuthPermission" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_permission_resource" domainObjectName="AuthPermissionResource" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_resource" domainObjectName="AuthResource" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_role" domainObjectName="AuthRole" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_role_permission" domainObjectName="AuthRolePermission" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_user" domainObjectName="AuthUser" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_user_group" domainObjectName="AuthUserGroup" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+        <table tableName="auth_user_role" domainObjectName="AuthUserRole" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_01" domainObjectName="PubLog01" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_02" domainObjectName="PubLog02" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_03" domainObjectName="PubLog03" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_04" domainObjectName="PubLog04" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_05" domainObjectName="PubLog05" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_06" domainObjectName="PubLog06" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_07" domainObjectName="PubLog07" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_08" domainObjectName="PubLog08" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_09" domainObjectName="PubLog09" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_10" domainObjectName="PubLog10" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_11" domainObjectName="PubLog11" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+		<table tableName="pub_log_12" domainObjectName="PubLog12" enableSelectByExample="false" enableUpdateByExample="false" enableCountByExample="false" enableDeleteByExample="false" modelType="flat" selectByExampleQueryId="false"/>
+    </context>
+</generatorConfiguration>

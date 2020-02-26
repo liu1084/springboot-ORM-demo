@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jim.orm.mybatis.service.mapper.PubLogMapper">
+	<resultMap id="BaseResultMap" type="com.jim.orm.common.entity.mybatis.PubLog">
+		<id column="id" jdbcType="BIGINT" property="id"/>
+		<result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
+		<result column="user_id" jdbcType="BIGINT" property="userId"/>
+		<result column="ip_address" jdbcType="VARCHAR" property="ipAddress"/>
+		<result column="browser" jdbcType="VARCHAR" property="browser"/>
+		<result column="geography_info" jdbcType="VARCHAR" property="geographyInfo"/>
+		<result column="method" jdbcType="VARCHAR" property="method"/>
+		<result column="url" jdbcType="VARCHAR" property="url"/>
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jim.orm.common.entity.mybatis.PubLog">
+		<result column="execute_sql" jdbcType="LONGVARCHAR" property="executeSql"/>
+		<result column="parameters" jdbcType="LONGVARCHAR" property="parameters"/>
+	</resultMap>
+	<sql id="PubLog_Base_Column_List">
+			id,
+			tenant_id,
+			user_id,
+			ip_address,
+			browser,
+			geography_info,
+			method,
+			url,
+			execute_sql,
+			parameters,
+			create_time
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="PubLog_Base_Column_List"/>
+		from pub_log_01
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from pub_log_01
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.jim.orm.common.entity.mybatis.PubLog">
+		insert into pub_log_01 (id, tenant_id, user_id,
+		ip_address, browser, geography_info,
+		method, url, create_time,
+		execute_sql, parameters)
+		values (#{id,jdbcType=BIGINT}, #{tenantId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{ipAddress,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, #{geographyInfo,jdbcType=VARCHAR},
+		#{method,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{executeSql,jdbcType=LONGVARCHAR}, #{parameters,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.jim.orm.common.entity.mybatis.PubLog">
+		insert into pub_log_01
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="tenantId != null">
+				tenant_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="ipAddress != null">
+				ip_address,
+			</if>
+			<if test="browser != null">
+				browser,
+			</if>
+			<if test="geographyInfo != null">
+				geography_info,
+			</if>
+			<if test="method != null">
+				method,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="executeSql != null">
+				execute_sql,
+			</if>
+			<if test="parameters != null">
+				parameters,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="tenantId != null">
+				#{tenantId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="browser != null">
+				#{browser,jdbcType=VARCHAR},
+			</if>
+			<if test="geographyInfo != null">
+				#{geographyInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				#{method,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="executeSql != null">
+				#{executeSql,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="parameters != null">
+				#{parameters,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.jim.orm.common.entity.mybatis.PubLog">
+		update pub_log_01
+		<set>
+			<if test="tenantId != null">
+				tenant_id = #{tenantId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="ipAddress != null">
+				ip_address = #{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="browser != null">
+				browser = #{browser,jdbcType=VARCHAR},
+			</if>
+			<if test="geographyInfo != null">
+				geography_info = #{geographyInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="executeSql != null">
+				execute_sql = #{executeSql,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="parameters != null">
+				parameters = #{parameters,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jim.orm.common.entity.mybatis.PubLog">
+		update pub_log_01
+		set tenant_id = #{tenantId,jdbcType=BIGINT},
+		user_id = #{userId,jdbcType=BIGINT},
+		ip_address = #{ipAddress,jdbcType=VARCHAR},
+		browser = #{browser,jdbcType=VARCHAR},
+		geography_info = #{geographyInfo,jdbcType=VARCHAR},
+		method = #{method,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		execute_sql = #{executeSql,jdbcType=LONGVARCHAR},
+		parameters = #{parameters,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.jim.orm.common.entity.mybatis.PubLog">
+		update pub_log_01
+		set tenant_id = #{tenantId,jdbcType=BIGINT},
+		user_id = #{userId,jdbcType=BIGINT},
+		ip_address = #{ipAddress,jdbcType=VARCHAR},
+		browser = #{browser,jdbcType=VARCHAR},
+		geography_info = #{geographyInfo,jdbcType=VARCHAR},
+		method = #{method,jdbcType=VARCHAR},
+		url = #{url,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jim.orm.mybatis.service.mapper.AuthGroupRoleMapper">
+  <resultMap id="BaseResultMap" type="com.jim.orm.common.entity.mybatis.AuthGroupRole">
+    <id column="role_id" jdbcType="BIGINT" property="roleId" />
+    <id column="group_id" jdbcType="BIGINT" property="groupId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from auth_group_role
+    where role_id = #{roleId,jdbcType=BIGINT}
+      and group_id = #{groupId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jim.orm.common.entity.mybatis.AuthGroupRole">
+    insert into auth_group_role (role_id, group_id)
+    values (#{roleId,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jim.orm.common.entity.mybatis.AuthGroupRole">
+    insert into auth_group_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
