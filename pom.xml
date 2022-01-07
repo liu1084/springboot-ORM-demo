@@ -48,7 +48,7 @@
 		<spring-boot.version>2.1.6.RELEASE</spring-boot.version>
 		<mysql.connector.version>8.0.16</mysql.connector.version>
 		<mybatis.version>2.1.1</mybatis.version>
-		<h2.version>1.4.200</h2.version>
+		<h2.version>2.0.206</h2.version>
 		<swagger-ui.version>2.9.2</swagger-ui.version>
 		<swagger.version>1.5.21</swagger.version>
 		<lombok.version>1.18.8</lombok.version>
